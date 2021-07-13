@@ -1,7 +1,7 @@
 export default class ColumnChart {
   element;
-  subElement = {};
-  chargeHeight = 50;
+  subElements = {};
+  chartHeight = 50;
 
   constructor({
     data = [],
@@ -20,13 +20,13 @@ export default class ColumnChart {
 
   getColumnBody(data) {
     const maxValue = Math.max(...data);
-    const scale = this.chargeHeight / maxValue;
+    const scale = this.chartHeight / maxValue;
 
     return data.map(item => {
       const percent = (item / maxValue * 100).toFixed(0);
 
-      return `<div style="--value: ${Math.floor(item * scale)} data-tooltip="${percent}%"></div>`
-    }).join('');
+        return `<div style="--value: ${Math.floor(item * scale)}" data-tooltip="${percent}%"></div>`;
+      }).join('');
   }
 
   getLink() {
@@ -40,13 +40,13 @@ export default class ColumnChart {
           Total ${this.label}
           ${this.getLink()}
         </div>
-      </div>
-      <div class="column-chart__container">
-        <div data-element="header" class="column-chart__header">
-        ${this.value}
-        </div>
-        <div data-element="body" class="column-chart__chart">
-        ${this.getColumnBody(this.data)}
+        <div class="column-chart__container">
+           <div data-element="header" class="column-chart__header">
+             ${this.value}
+           </div>
+          <div data-element="body" class="column-chart__chart">
+            ${this.getColumnBody(this.data)}
+          </div>
         </div>
       </div>
     `;
