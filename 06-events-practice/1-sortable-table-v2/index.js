@@ -1,4 +1,4 @@
-export default class SortableTable { v1
+export default class SortableTable {
   element;
   subElements = {};
 
@@ -29,7 +29,7 @@ export default class SortableTable { v1
     }
   };
 
-  constructor(headerConfig = [],  {
+  constructor(headerConfig = [], {
     data = [],
     sorted = {
       id: headerConfig.find(item => item.sortable).id,
@@ -49,16 +49,13 @@ export default class SortableTable { v1
     </div>`;
   }
 
-
   getHeaderRow({id, title, sortable}) {
     const order = this.sorted.id === id ? this.sorted.order : 'asc';
 
     return `
-      <div class="sortable-table__cell" data-id="${id}" data-sortable="${sortable}">
+      <div class="sortable-table__cell" data-id="${id}" data-sortable="${sortable}" data-order="${order}">
         <span>${title}</span>
-        <span data-element="arrow" class="sortable-table__sort-arrow">
-          <span class="sort-arrow"></span>
-        </span>
+        ${this.getHeaderSortingArrow(id)}
       </div>
     `;
   }
@@ -76,17 +73,16 @@ export default class SortableTable { v1
   getTableBody(data) {
     return `
       <div data-element="body" class="sortable-table__body">
-        ${this.getTableRows(this.data)}
+        ${this.getTableRows(data)}
       </div>`;
   }
 
   getTableRows(data) {
-    return data.map(item => {
-      return `
-        <a href="/products/${item.id}" class="sortable-table__row">
-          ${this.getTableRow(item)}
-        </a>`;
-    }).join('');
+    return data.map(item => `
+      <div class="sortable-table__row">
+        ${this.getTableRow(item)}
+      </div>`
+    ).join('');
   }
 
   getTableRow(item) {
