@@ -94,4 +94,4 @@ export default class ColumnChart {
     this.element = null;
     this.subElements = {};
   }
-};
+}
