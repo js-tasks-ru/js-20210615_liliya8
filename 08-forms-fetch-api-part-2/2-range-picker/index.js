@@ -162,7 +162,6 @@ export default class RangePicker {
 
     date.setDate(1);
 
-    // text-transform: capitalize
     const monthStr = date.toLocaleString('ru', {month: 'long'});
 
     let table = `<div class="rangepicker__calendar">
@@ -175,8 +174,6 @@ export default class RangePicker {
       <div class="rangepicker__date-grid">
     `;
 
-    // first day of month starts after a space
-    // * * * 1 2 3 4
     table += `
       <button type="button"
         class="rangepicker__cell"
@@ -198,7 +195,6 @@ export default class RangePicker {
       date.setDate(date.getDate() + 1);
     }
 
-    // close the table
     table += '</div></div>';
 
     return table;
@@ -247,7 +243,6 @@ export default class RangePicker {
 
   remove() {
     this.element.remove();
-    // TODO: Warning! To remove listener  MUST be passes the same event phase
     document.removeEventListener('click', this.onDocumentClick, true);
   }
 
